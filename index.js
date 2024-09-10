@@ -8,6 +8,10 @@ app.get("/", (req, res) => {
     res.render("index")
 })
 
+app.get("/pergunta", (req, res) => {
+    res.render("pergunta")
+})
+
 app.listen(8000, () => {
     console.log("Server ON!")
 })
