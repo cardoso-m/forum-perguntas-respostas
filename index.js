@@ -2,11 +2,10 @@ const express = require("express")
 const app = express()
 const bodyParser = require("body-parser")
 const connection = require("./database/database")
-const modelPergunta = require("./database/pergunta")
+const Pergunta = require("./database/pergunta")
 
 connection.authenticate()
     .then(() => {
-        console.log("Sucesso")
     })
     .catch((Msgerror) => {
         console.log(Msgerror)
@@ -29,7 +28,15 @@ app.get("/pergunta", (req, res) => {
 app.post("/perguntar", (req, res) => {
     var title = req.body.title
     var desc = req.body.desc
-    res.send("Titulo:" + title + "<br>" + "Descrição:" + desc)
+    //res.send("Titulo:" + title + "<br>" + "Descrição:" + desc)
+
+    Pergunta.create({
+        titulo: title,
+        descricao: desc
+    }).then(() => {
+        res.redirect('/')
+    })
+
 })
 
 app.listen(8000, () => {
