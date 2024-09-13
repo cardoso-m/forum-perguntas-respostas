@@ -1,6 +1,16 @@
 const express = require("express")
 const app = express()
 const bodyParser = require("body-parser")
+const connection = require("./database/database")
+const modelPergunta = require("./database/pergunta")
+
+connection.authenticate()
+    .then(() => {
+        console.log("Sucesso")
+    })
+    .catch((Msgerror) => {
+        console.log(Msgerror)
+    })
 
 app.set("view engine", "ejs")
 
