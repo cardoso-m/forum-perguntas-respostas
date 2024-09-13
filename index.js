@@ -2,11 +2,10 @@ const express = require("express")
 const app = express()
 const bodyParser = require("body-parser")
 const connection = require("./database/database")
-const modelPergunta = require("./database/pergunta")
+const Pergunta = require("./database/pergunta")
 
 connection.authenticate()
     .then(() => {
-        console.log("Sucesso")
     })
     .catch((Msgerror) => {
         console.log(Msgerror)
@@ -19,7 +18,17 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 app.get("/", (req, res) => {
-    res.render("index")
+
+    Pergunta.findAll({
+        raw: true, order: [
+            ['id', 'ASC']
+        ]
+    }).then((perguntas) => {
+        console.log(perguntas)
+        res.render("index", {
+            perguntas: perguntas
+        })
+    })
 })
 
 app.get("/pergunta", (req, res) => {
@@ -29,7 +38,15 @@ app.get("/pergunta", (req, res) => {
 app.post("/perguntar", (req, res) => {
     var title = req.body.title
     var desc = req.body.desc
-    res.send("Titulo:" + title + "<br>" + "Descrição:" + desc)
+    //res.send("Titulo:" + title + "<br>" + "Descrição:" + desc)
+
+    Pergunta.create({
+        titulo: title,
+        descricao: desc
+    }).then(() => {
+        res.redirect('/')
+    })
+
 })
 
 app.listen(8000, () => {
