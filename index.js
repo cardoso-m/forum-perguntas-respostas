@@ -7,9 +7,7 @@ const Pergunta = require("./database/pergunta")
 connection.authenticate()
     .then(() => {
     })
-    .catch((Msgerror) => {
-        console.log(Msgerror)
-    })
+    .catch((Msgerror) => { console.log(Msgerror) })
 
 app.set("view engine", "ejs")
 
@@ -45,6 +43,24 @@ app.post("/perguntar", (req, res) => {
         descricao: desc
     }).then(() => {
         res.redirect('/')
+    })
+
+})
+
+app.get("/pergunta/:id", (req, res) => {
+    var id = req.params.id
+
+    Pergunta.findOne({
+        where: { id: id }
+    }).then(pergunta => {
+        if (pergunta != undefined) {
+            //CRIAR PÁGINA PARA EXIBIR A PERGUNTA ESPECIFICA
+            res.render("perguntar", {
+                pergunta: pergunta
+            })
+        } else {
+            res.redirect("/")
+        }
     })
 
 })
