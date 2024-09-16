@@ -3,17 +3,26 @@
     <body>
         <%- include("partials/navbar.ejs") %>
             <div class="container">
+                <br>
+                <h3>Pergunta:</h3>
                 <hr>
-                <h3>Pergunta</h3>
+
+                <h5>
+                    <%= pergunta.titulo %>
+                </h5>
+                <p><%- pergunta.descricao %></p>
+
+                <br>
+                <h3>Resposta:</h3>
                 <hr>
-                <div class="card">
-                    <div class="card-body">
-                        <h5>
-                            <%= pergunta.titulo %>
-                        </h5>
-                        <p><%- pergunta.descricao %></p>
+                <form>
+                    <h5>Digite sua resposta abaixo:</h5>
+                    <textarea class="form-control" name="corpo"></textarea><br>
+                    <input type="hidden" name="pergunta" value="<%- pergunta.id %>">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button class="btn btn-primary">Responder</button>
                     </div>
-                </div>
+                </form>
             </div>
 
     </body>
