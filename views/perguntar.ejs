@@ -5,35 +5,36 @@
             <div class="container">
                 <br>
                 <h3>Pergunta:</h3>
+                <br>
+
+                <div class="card">
+                    <div class="card-body">
+                        <h5>
+                            <%= pergunta.titulo %>
+                        </h5>
+                        <p>- <%- pergunta.descricao %></p>
+                    </div>
+                </div>
                 <hr>
-
-                <h5>
-                    <%= pergunta.titulo %>
-                </h5>
-
-                <p><%- pergunta.descricao %></p>
-
+                <h3>Resposta:</h3>
+                <form method="post" action="/responder">
+                    <h5>Digite sua resposta abaixo:</h5>
+                    <textarea class="form-control" name="corpo"></textarea><br>
+                    <input type="hidden" name="perguntaId" value="<%- pergunta.id %>">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                        <button class="btn btn-primary">Responder</button>
+                    </div>
+                </form>
                 <hr>
                 <h3>Respostas:</h3>
-
                 <% resposta.forEach(resposta=>{ %>
-
-                    <p><%- resposta.corpo %></p>
-
+                    <div class="card">
+                        <div class="card-body">
+                            <p><%- resposta.corpo %></p>
+                        </div>
+                    </div>
+                    <br>
                     <% }) %>
-
-                        <hr>
-
-                        <h3>Resposta:</h3>
-                        <form method="post" action="/responder">
-                            <h5>Digite sua resposta abaixo:</h5>
-                            <textarea class="form-control" name="corpo"></textarea><br>
-                            <input type="hidden" name="perguntaId" value="<%- pergunta.id %>">
-                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                                <button class="btn btn-primary">Responder</button>
-                            </div>
-                        </form>
-
 
 
             </div>
