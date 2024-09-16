@@ -10,19 +10,32 @@
                 <h5>
                     <%= pergunta.titulo %>
                 </h5>
+
                 <p><%- pergunta.descricao %></p>
 
-                <br>
-                <h3>Resposta:</h3>
                 <hr>
-                <form>
-                    <h5>Digite sua resposta abaixo:</h5>
-                    <textarea class="form-control" name="corpo"></textarea><br>
-                    <input type="hidden" name="pergunta" value="<%- pergunta.id %>">
-                    <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-                        <button class="btn btn-primary">Responder</button>
-                    </div>
-                </form>
+                <h3>Respostas:</h3>
+
+                <% resposta.forEach(resposta=>{ %>
+
+                    <p><%- resposta.corpo %></p>
+
+                    <% }) %>
+
+                        <hr>
+
+                        <h3>Resposta:</h3>
+                        <form method="post" action="/responder">
+                            <h5>Digite sua resposta abaixo:</h5>
+                            <textarea class="form-control" name="corpo"></textarea><br>
+                            <input type="hidden" name="perguntaId" value="<%- pergunta.id %>">
+                            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+                                <button class="btn btn-primary">Responder</button>
+                            </div>
+                        </form>
+
+
+
             </div>
 
     </body>
